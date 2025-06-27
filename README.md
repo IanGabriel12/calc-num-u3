@@ -55,3 +55,9 @@ Usando o arquivo `data/example.csv` deve-se obter este resultado ao executar o s
     <img src="./docs//images/example.csv.png"/>
 </div>
 
+### Visualizando o método do trapézio
+
+A função `plota_trapezoids_grafico` plota o gráfico e os trapézio utilizados na função, dessa forma conseguimos visualizar o funcionamento do método.
+<div align="center">
+    <img src="./docs//images/image.png"/>
+</div>
