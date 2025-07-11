@@ -20,19 +20,29 @@ with open(argv[1], 'r') as file:
     min_y = min(y for _, y in points)
     max_y = max(y for _, y in points)
 
-    x = np.linspace(min_x, max_x)
-    y = b * (x**a)
+    x_all = np.linspace(min_x, 2050.9167, 1000)
+    y_all = b * (x_all**a)
 
-    plt.title('Gráfico de teste')
-    plt.xlabel('Eixo X (Tempo)')
-    plt.ylabel('Eixo Y (Amplitude)')
+    future_years = np.arange(2025, 2051, 1)
+    future_decimal_dates = [year + month/12 for year in future_years for month in range(12)]
+    future_predictions = [b * (x**a) for x in future_decimal_dates]
+
+    with open("predictions/previsoes_2025_2050_potencial.csv", "w") as out_file:
+        out_file.write("decimal_date,monthly_prediction\n")
+        for date, prediction in zip(future_decimal_dates, future_predictions):
+            out_file.write(f"{date:.4f},{prediction:.2f}\n")
+
+    plt.title('Ajuste Potencial das Emissões de CO₂')
+    plt.xlabel('Ano (decimal)')
+    plt.ylabel('CO₂ (ppm)')
     plt.grid(True)
 
-    plt.yticks(np.arange(min_y, max_y, 1.0))
-    plt.yticks(np.arange(min_y, max_y, 0.1), minor=True)
+    plt.plot([x for x, _ in points], [y for _, y in points], 'o', markersize=0.75, label='Dados reais')
 
-    plt.grid(which='major', color='gray', linestyle=':', linewidth=1)
+    plt.plot(x_all, y_all, 'b-', label='Ajuste Potencial')
 
-    plt.plot([x for x, _ in points], [y for _, y in points], 'x') # Plote os pontos
-    plt.plot(x, y) # Plote o ajuste de potencial
+    plt.plot(future_decimal_dates, future_predictions, 'r.', label='Previsões 2025-2050', markersize=3)
+
+    plt.legend()
+    plt.savefig("graphics/ajuste_potencial.png", dpi=300, bbox_inches='tight')
     plt.show()

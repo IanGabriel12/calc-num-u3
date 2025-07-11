@@ -1,10 +1,10 @@
 from sys import argv
-from mmq.geo import geometric_adjustment
+from mmq.quadr import ajuste_quadratico
 import matplotlib.pyplot as plt
 import numpy as np
 
 if len(argv) != 2:
-    print("Usage: main_exp.py file.csv")
+    print("Usage: main_linear.py file.csv")
     exit(0)
 
 with open(argv[1], 'r') as file:
@@ -14,35 +14,36 @@ with open(argv[1], 'r') as file:
         x, y = map(float, line.split(','))
         points.append((x, y))
     
-    a, b = geometric_adjustment(points)
+    a, b, c = ajuste_quadratico(points)
     min_x = min(x for x, _ in points)
     max_x = max(x for x, _ in points)
     min_y = min(y for _, y in points)
     max_y = max(y for _, y in points)
 
     x_all = np.linspace(min_x, 2050.9167, 1000)
-    y_all = b * (a**x_all)
+    y_all = a *(x_all**2) + b*x_all + c
 
     future_years = np.arange(2025, 2051, 1)
     future_decimal_dates = [year + month/12 for year in future_years for month in range(12)]
-    future_predictions = [b * (a**x) for x in future_decimal_dates]
+    future_predictions = [a*(x**2) + b*x + c for x in future_decimal_dates]
 
-    with open("predictions/previsoes_2025_2050_geometrica.csv", "w") as out_file:
+    with open("predictions/previsoes_2025_2050_quadratica.csv", "w") as out_file:
         out_file.write("decimal_date,monthly_prediction\n")
         for date, prediction in zip(future_decimal_dates, future_predictions):
             out_file.write(f"{date:.4f},{prediction:.2f}\n")
 
-    plt.title('Ajuste Geométrico das Emissões de CO₂')
+    plt.title('Ajuste Quadrático das Emissões de CO₂')
     plt.xlabel('Ano (decimal)')
     plt.ylabel('CO₂ (ppm)')
     plt.grid(True)
 
     plt.plot([x for x, _ in points], [y for _, y in points], 'o', markersize=0.75, label='Dados reais')
 
-    plt.plot(x_all, y_all, 'b-', label='Ajuste Geométrico')
+    plt.plot(x_all, y_all, 'b-', label='Ajuste Quadrático')
 
     plt.plot(future_decimal_dates, future_predictions, 'r.', label='Previsões 2025-2050', markersize=3)
 
     plt.legend()
-    plt.savefig("graphics/ajuste_geometrico.png", dpi=300, bbox_inches='tight')
+    plt.savefig("graphics/ajuste_quadratico.png", dpi=300, bbox_inches='tight')
     plt.show()
+
