@@ -23,6 +23,23 @@ with open(argv[1], 'r') as file:
     x_all = np.linspace(min_x, 2050.9167, 1000)
     y_all = a * x_all + b
 
+    start = 1958.2027
+    end = 2025.375
+    step = 1/12
+
+    early_decimal_dates = []
+    x = start
+    while x <= end + 1e-6:  # tolerância para evitar erro de ponto flutuante
+        early_decimal_dates.append(round(x, 4))
+        x += step
+
+    early_predictions = [a * x + b for x in early_decimal_dates]
+
+    with open("r2_comparation/ajuste_1958_2025_linear.csv", "w") as out_file:
+        out_file.write("decimal_date,adjusted_prediction\n")
+        for date, prediction in zip(early_decimal_dates, early_predictions):
+            out_file.write(f"{date:.4f},{prediction:.2f}\n")
+            
     future_years = np.arange(2025, 2051, 1)
     future_decimal_dates = [year + month/12 for year in future_years for month in range(12)]
     future_predictions = [a * x + b for x in future_decimal_dates]

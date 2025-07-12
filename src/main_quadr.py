@@ -23,27 +23,44 @@ with open(argv[1], 'r') as file:
     x_all = np.linspace(min_x, 2050.9167, 1000)
     y_all = a *(x_all**2) + b*x_all + c
 
-    future_years = np.arange(2025, 2051, 1)
-    future_decimal_dates = [year + month/12 for year in future_years for month in range(12)]
-    future_predictions = [a*(x**2) + b*x + c for x in future_decimal_dates]
+    start = 1958.2027
+    end = 2025.375
+    step = 1/12
 
-    with open("predictions/previsoes_2025_2050_quadratica.csv", "w") as out_file:
-        out_file.write("decimal_date,monthly_prediction\n")
-        for date, prediction in zip(future_decimal_dates, future_predictions):
+    early_decimal_dates = []
+    x = start
+    while x <= end + 1e-6:  # tolerância para evitar erro de ponto flutuante
+        early_decimal_dates.append(round(x, 4))
+        x += step
+
+    early_predictions = [a*(x**2) + b*x + c for x in early_decimal_dates]
+
+    with open("r2_comparation/ajuste_1958_2025_quadratico.csv", "w") as out_file:
+        out_file.write("decimal_date,adjusted_prediction\n")
+        for date, prediction in zip(early_decimal_dates, early_predictions):
             out_file.write(f"{date:.4f},{prediction:.2f}\n")
 
-    plt.title('Ajuste Quadrático das Emissões de CO₂')
-    plt.xlabel('Ano (decimal)')
-    plt.ylabel('CO₂ (ppm)')
-    plt.grid(True)
+    #future_years = np.arange(2025, 2051, 1)
+    #future_decimal_dates = [year + month/12 for year in future_years for month in range(12)]
+    #future_predictions = [a*(x**2) + b*x + c for x in future_decimal_dates]
 
-    plt.plot([x for x, _ in points], [y for _, y in points], 'o', markersize=0.75, label='Dados reais')
+    #with open("predictions/previsoes_2025_2050_quadratica.csv", "w") as out_file:
+        #out_file.write("decimal_date,monthly_prediction\n")
+        #for date, prediction in zip(future_decimal_dates, future_predictions):
+            #out_file.write(f"{date:.4f},{prediction:.2f}\n")
 
-    plt.plot(x_all, y_all, 'b-', label='Ajuste Quadrático')
+    #plt.title('Ajuste Quadrático das Emissões de CO₂')
+    #plt.xlabel('Ano (decimal)')
+    #plt.ylabel('CO₂ (ppm)')
+    #plt.grid(True)
 
-    plt.plot(future_decimal_dates, future_predictions, 'r.', label='Previsões 2025-2050', markersize=3)
+    #plt.plot([x for x, _ in points], [y for _, y in points], 'o', markersize=0.75, label='Dados reais')
 
-    plt.legend()
-    plt.savefig("graphics/ajuste_quadratico.png", dpi=300, bbox_inches='tight')
-    plt.show()
+    #plt.plot(x_all, y_all, 'b-', label='Ajuste Quadrático')
+
+    #plt.plot(future_decimal_dates, future_predictions, 'r.', label='Previsões 2025-2050', markersize=3)
+
+    #plt.legend()
+    #plt.savefig("graphics/ajuste_quadratico.png", dpi=300, bbox_inches='tight')
+    #plt.show()
 
