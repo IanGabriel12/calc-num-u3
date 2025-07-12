@@ -27,6 +27,14 @@ with open(argv[1], 'r') as file:
     end = 2025.375
     step = 1/12
 
+    # with open("tables/tabela_dados_linear.csv", "w") as out_file:
+    #     out_file.write("x,y,xy,x^2\n")
+    #     for x, y in points:
+    #         out_file.write(f"{x:.4f},{y:.2f},{x*y:.4f},{x*x:.4f}\n")
+
+    # with open("r2_comparation/results/parametros_resultado.txt", "a") as out_file:
+    #     out_file.write(f"Parâmetros linear: a={a:.4f}, b={b:.4f}\n");
+
     #early_decimal_dates = []
     #x = start
     #while x <= end + 1e-6:  # tolerância para evitar erro de ponto flutuante

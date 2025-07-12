@@ -2,6 +2,7 @@ from sys import argv
 from mmq.pot import pow_adjustment
 import matplotlib.pyplot as plt
 import numpy as np
+import math
 
 if len(argv) != 2:
     print("Usage: main_exp.py file.csv")
@@ -22,6 +23,16 @@ with open(argv[1], 'r') as file:
 
     x_all = np.linspace(min_x, 2050.9167, 1000)
     y_all = b * (x_all**a)
+
+    # with open("tables/tabela_dados_potencial.csv", "w") as out_file:
+    #     out_file.write("x,y,ln(x),ln(y),ln(x)ln(y),ln(x)^2\n")
+    #     for x, y in points:
+    #         lnx = math.log(x)
+    #         lny = math.log(y)
+    #         out_file.write(f"{x:.4f},{y:.2f},{lnx:.4f},{lny:.4f},{lnx*lny:.4f},{lnx*lnx:.4f}\n")
+    
+    # with open("r2_comparation/results/parametros_resultado.txt", "a") as out_file:
+    #     out_file.write(f"Parâmetros potencial a={a:.4f}, b={b}\n");
 
     start = 1958.2027
     end = 2025.375
