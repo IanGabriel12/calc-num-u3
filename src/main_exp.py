@@ -40,26 +40,34 @@ with open(argv[1], 'r') as file:
         for date, prediction in zip(early_decimal_dates, early_predictions):
             out_file.write(f"{date:.4f},{prediction:.2f}\n")
 
-    #future_years = np.arange(2025, 2051, 1)
-    #future_decimal_dates = [year + month/12 for year in future_years for month in range(12)]
-    #future_predictions = [b * np.exp(a * x) for x in future_decimal_dates]
+    future_years = np.arange(2025, 2051, 1)
+    future_decimal_dates = [year + month/12 for year in future_years for month in range(12)]
+    future_predictions = [b * np.exp(a * x) for x in future_decimal_dates]
 
     #with open("predictions/previsoes_2025_2050_exponencial.csv", "w") as out_file:
         #out_file.write("decimal_date,monthly_prediction\n")
         #for date, prediction in zip(future_decimal_dates, future_predictions):
             #out_file.write(f"{date:.4f},{prediction:.2f}\n")
 
-    #plt.title('Ajuste Exponencial das Emissões de CO₂')
-    #plt.xlabel('Ano (decimal)')
-    #plt.ylabel('CO₂ (ppm)')
-    #plt.grid(True)
+    plt.figure(figsize=(12, 6))
+    plt.title('Ajuste Exponencial das Emissões de CO₂')
+    plt.xlabel('Ano')
+    plt.ylabel('CO₂ (ppm)')
+    plt.grid(True)
 
-    #plt.plot([x for x, _ in points], [y for _, y in points], 'o', markersize=0.75, label='Dados reais')
+    plt.xlim(1950, 2055)
+    plt.ylim(300, 500)
 
-    #plt.plot(x_all, y_all, 'b-', label='Ajuste Exponencial')
+    plt.xticks(np.arange(1950, 2051, 10))
+    plt.yticks(np.arange(300, 501, 10))
 
-    #plt.plot(future_decimal_dates, future_predictions, 'r.', label='Previsões 2025-2050', markersize=3)
+    plt.plot([x for x, _ in points], [y for _, y in points], 'o', markersize=1, label='Dados reais')
 
-    #plt.legend()
-    #plt.savefig("graphics/ajuste_exponencial.png", dpi=300, bbox_inches='tight')
-    #plt.show()
+    plt.plot(x_all, y_all, 'b-', label='Ajuste Exponencial')
+
+    plt.plot(future_decimal_dates, future_predictions, 'r.', label='Previsões 2025-2050', 
+    markersize=3)
+
+    plt.legend(loc='upper left')
+    plt.savefig("graphics/ajuste_exponencial.png", dpi=300, bbox_inches='tight')
+    plt.show()
