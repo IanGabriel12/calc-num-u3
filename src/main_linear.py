@@ -20,20 +20,63 @@ with open(argv[1], 'r') as file:
     min_y = min(y for _, y in points)
     max_y = max(y for _, y in points)
 
-    x = np.linspace(min_x, max_x)
-    y = a*x + b
+    x_all = np.linspace(min_x, 2050.9167, 1000)
+    y_all = a * x_all + b
 
-    plt.title('Gráfico de teste')
-    plt.xlabel('Eixo X (Tempo)')
-    plt.ylabel('Eixo Y (Amplitude)')
+    start = 1958.2027
+    end = 2025.375
+    step = 1/12
+
+    # with open("tables/tabela_dados_linear.csv", "w") as out_file:
+    #     out_file.write("x,y,xy,x^2\n")
+    #     for x, y in points:
+    #         out_file.write(f"{x:.4f},{y:.2f},{x*y:.4f},{x*x:.4f}\n")
+
+    # with open("r2_comparation/results/parametros_resultado.txt", "a") as out_file:
+    #     out_file.write(f"Parâmetros linear: a={a:.4f}, b={b:.4f}\n");
+
+    #early_decimal_dates = []
+    #x = start
+    #while x <= end + 1e-6:  # tolerância para evitar erro de ponto flutuante
+        #early_decimal_dates.append(round(x, 4))
+        #x += step
+
+    #early_predictions = [a * x + b for x in early_decimal_dates]
+
+    #with open("r2_comparation/ajuste_1958_2025_linear.csv", "w") as out_file:
+        #out_file.write("decimal_date,adjusted_prediction\n")
+        #for date, prediction in zip(early_decimal_dates, early_predictions):
+            #out_file.write(f"{date:.4f},{prediction:.2f}\n")
+            
+    future_years = np.arange(2025, 2051, 1)
+    future_decimal_dates = [year + month/12 for year in future_years for month in range(12)]
+    future_predictions = [a * x + b for x in future_decimal_dates]
+
+    #with open("predictions/previsoes_2025_2050_linear.csv", "w") as out_file:
+        #out_file.write("decimal_date,monthly_prediction\n")
+        #for date, prediction in zip(future_decimal_dates, future_predictions):
+            #out_file.write(f"{date:.4f},{prediction:.2f}\n")
+
+    plt.figure(figsize=(12, 6))
+    plt.title('Ajuste Linear das Emissões de CO₂')
+    plt.xlabel('Ano')
+    plt.ylabel('CO₂ (ppm)')
     plt.grid(True)
 
-    plt.yticks(np.arange(min_y, max_y, 1.0))
-    plt.yticks(np.arange(min_y, max_y, 0.1), minor=True)
+    plt.xlim(1950, 2055)
+    plt.ylim(300, 500)
 
-    plt.grid(which='major', color='gray', linestyle=':', linewidth=1)
+    plt.xticks(np.arange(1950, 2051, 10))
+    plt.yticks(np.arange(300, 501, 10))
 
-    plt.plot([x for x, _ in points], [y for _, y in points], 'x') # Plote os pontos
-    plt.plot(x, y) # Plote o ajuste linear
+    plt.plot([x for x, _ in points], [y for _, y in points], 'o', markersize=1, label='Dados reais')
+
+    plt.plot(x_all, y_all, 'b-', label='Ajuste Linear')
+
+    plt.plot(future_decimal_dates, future_predictions, 'r.', label='Previsões 2025-2050', 
+    markersize=3)
+
+    plt.legend(loc='upper left')
+    plt.savefig("graphics/ajuste_linear.png", dpi=300, bbox_inches='tight')
     plt.show()
 

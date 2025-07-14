@@ -1,3 +1,5 @@
+import numpy as np
+
 def calcular_r_quadrado(ys, gis):
   """
   Calcula o coeficiente de determinação R² (R-quadrado).
