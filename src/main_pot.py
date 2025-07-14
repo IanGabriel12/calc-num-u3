@@ -24,15 +24,15 @@ with open(argv[1], 'r') as file:
     x_all = np.linspace(min_x, 2050.9167, 1000)
     y_all = b * (x_all**a)
 
-    # with open("tables/tabela_dados_potencial.csv", "w") as out_file:
-    #     out_file.write("x,y,ln(x),ln(y),ln(x)ln(y),ln(x)^2\n")
-    #     for x, y in points:
-    #         lnx = math.log(x)
-    #         lny = math.log(y)
-    #         out_file.write(f"{x:.4f},{y:.2f},{lnx:.4f},{lny:.4f},{lnx*lny:.4f},{lnx*lnx:.4f}\n")
+    with open("tables/tabela_dados_potencial.csv", "w") as out_file:
+        out_file.write("x,y,ln(x),ln(y),ln(x)ln(y),ln(x)^2\n")
+        for x, y in points:
+            lnx = math.log(x)
+            lny = math.log(y)
+            out_file.write(f"{x:.4f},{y:.2f},{lnx:.4f},{lny:.4f},{lnx*lny:.4f},{lnx*lnx:.4f}\n")
     
-    # with open("r2_comparation/results/parametros_resultado.txt", "a") as out_file:
-    #     out_file.write(f"Parâmetros potencial a={a:.4f}, b={b}\n");
+    with open("r2_comparation/results/parametros_resultado.txt", "a") as out_file:
+         out_file.write(f"Parâmetros potencial a={a:.4f}, b={b}\n");
 
     start = 1958.2027
     end = 2025.375
@@ -55,10 +55,10 @@ with open(argv[1], 'r') as file:
     future_decimal_dates = [year + month/12 for year in future_years for month in range(12)]
     future_predictions = [b * (x**a) for x in future_decimal_dates]
 
-    #with open("predictions/previsoes_2025_2050_potencial.csv", "w") as out_file:
-        #out_file.write("decimal_date,monthly_prediction\n")
-        #for date, prediction in zip(future_decimal_dates, future_predictions):
-            #out_file.write(f"{date:.4f},{prediction:.2f}\n")
+    with open("predictions/previsoes_2025_2050_potencial.csv", "w") as out_file:
+        out_file.write("decimal_date,monthly_prediction\n")
+        for date, prediction in zip(future_decimal_dates, future_predictions):
+            out_file.write(f"{date:.4f},{prediction:.2f}\n")
 
     plt.figure(figsize=(12, 6))
     plt.title('Ajuste Potencial das Emissões de CO₂')
