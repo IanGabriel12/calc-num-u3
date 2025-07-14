@@ -21,13 +21,13 @@ with open(argv[1], 'r') as file:
     min_y = min(y for _, y in points)
     max_y = max(y for _, y in points)
 
-    # with open("tables/tabela_dados_geometrica.csv", "w") as out_file:
-    #     out_file.write("x,y,ln(y),xln(y),x^2\n")
-    #     for x, y in points:
-    #         out_file.write(f"{x:.4f},{y:.2f},{math.log(y):.4f},{x*math.log(y):.4f},{x*x:.4f}\n")
+    with open("tables/tabela_dados_geometrica.csv", "w") as out_file:
+        out_file.write("x,y,ln(y),xln(y),x^2\n")
+        for x, y in points:
+            out_file.write(f"{x:.4f},{y:.2f},{math.log(y):.4f},{x*math.log(y):.4f},{x*x:.4f}\n")
     
-    # with open("r2_comparation/results/parametros_resultado.txt", "a") as out_file:
-    #     out_file.write(f"Parâmetros geometrica a={a:.4f}, b={b:.4f}\n");
+    with open("r2_comparation/results/parametros_resultado.txt", "a") as out_file:
+        out_file.write(f"Parâmetros geometrica a={a:.4f}, b={b:.4f}\n");
 
     x_all = np.linspace(min_x, 2050.9167, 1000)
     y_all = b * (a**x_all)
@@ -53,10 +53,10 @@ with open(argv[1], 'r') as file:
     future_decimal_dates = [year + month/12 for year in future_years for month in range(12)]
     future_predictions = [b * (a**x) for x in future_decimal_dates]
 
-    #with open("predictions/previsoes_2025_2050_geometrica.csv", "w") as out_file:
-        #out_file.write("decimal_date,monthly_prediction\n")
-        #for date, prediction in zip(future_decimal_dates, future_predictions):
-            #out_file.write(f"{date:.4f},{prediction:.2f}\n")
+    with open("predictions/previsoes_2025_2050_geometrica.csv", "w") as out_file:
+        out_file.write("decimal_date,monthly_prediction\n")
+        for date, prediction in zip(future_decimal_dates, future_predictions):
+            out_file.write(f"{date:.4f},{prediction:.2f}\n")
 
     plt.figure(figsize=(12, 6))
     plt.title('Ajuste Geométrico das Emissões de CO₂')

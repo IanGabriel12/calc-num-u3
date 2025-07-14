@@ -28,13 +28,13 @@ with open(argv[1], 'r') as file:
     end = 2025.375
     step = 1/12
 
-    # with open("tables/tabela_dados_logaritmico.csv", "w") as out_file:
-    #     out_file.write("x,y,ln(x),ln(x)y,ln(x)^2\n")
-    #     for x, y in points:
-    #         out_file.write(f"{x:.4f},{y:.2f},{math.log(x):.4f},{math.log(x)*y:.4f},{math.log(x)*math.log(x):.4f}\n")
+    with open("tables/tabela_dados_logaritmico.csv", "w") as out_file:
+        out_file.write("x,y,ln(x),ln(x)y,ln(x)^2\n")
+        for x, y in points:
+            out_file.write(f"{x:.4f},{y:.2f},{math.log(x):.4f},{math.log(x)*y:.4f},{math.log(x)*math.log(x):.4f}\n")
 
-    # with open("r2_comparation/results/parametros_resultado.txt", "a") as out_file:
-    #     out_file.write(f"Parâmetros logaritmico: a={a:.4f}, b={b:.4f}\n");
+    with open("r2_comparation/results/parametros_resultado.txt", "a") as out_file:
+        out_file.write(f"Parâmetros logaritmico: a={a:.4f}, b={b:.4f}\n");
 
     early_decimal_dates = []
     x = start
@@ -53,10 +53,10 @@ with open(argv[1], 'r') as file:
     future_decimal_dates = [year + month/12 for year in future_years for month in range(12)]
     future_predictions = [a * np.log(x) + b for x in future_decimal_dates]
 
-    #with open("predictions/previsoes_2025_2050_logaritmica.csv", "w") as out_file:
-       #out_file.write("decimal_date,monthly_prediction\n")
-        #for date, prediction in zip(future_decimal_dates, future_predictions):
-            #out_file.write(f"{date:.4f},{prediction:.2f}\n")
+    with open("predictions/previsoes_2025_2050_logaritmica.csv", "w") as out_file:
+        out_file.write("decimal_date,monthly_prediction\n")
+        for date, prediction in zip(future_decimal_dates, future_predictions):
+            out_file.write(f"{date:.4f},{prediction:.2f}\n")
 
     plt.figure(figsize=(12, 6))
     plt.title('Ajuste Logarítmico das Emissões de CO₂')
