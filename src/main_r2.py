@@ -28,6 +28,6 @@ if len(ys) != len(gis):
 
 r2 = calcular_r_quadrado(ys, gis)
 
-with open("r2_comparation/results/r2_resultado.txt", "a") as out_file:
-    out_file.write(f"Coeficiente de Determinacao R2 para o Ajuste Potencial: {r2:.6f}\n")
+with open("r2_comparation_paris_agreement/results/r2_resultado.txt", "a") as out_file:
+    out_file.write(f"Coeficiente de Determinacao R2 para o Ajuste Linear: {r2:.6f}\n")
 

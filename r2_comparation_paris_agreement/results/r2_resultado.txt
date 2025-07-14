@@ -1,0 +1,6 @@
+Coeficiente de Determinacao R2 para o Ajuste Linear: 0.895161
+Coeficiente de Determinacao R2 para o Ajuste Exponencial: 0.894002
+Coeficiente de Determinacao R2 para o Ajuste Geometrico: 0.894002
+Coeficiente de Determinacao R2 para o Ajuste Logaritmico: 0.894984
+Coeficiente de Determinacao R2 para o Ajuste Potencial: 0.893943
+Coeficiente de Determinacao R2 para o Ajuste Quadratico: 0.897082
