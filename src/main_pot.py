@@ -35,7 +35,7 @@ with open(argv[1], 'r') as file:
 
     early_predictions = [b * (x**a) for x in early_decimal_dates]
 
-    with open("r2_comparation_paris_agreement/ajuste_2016_2025_potencialv2.csv", "w") as out_file:
+    with open("r2_comparation_paris_agreement/ajuste_2016_2025_potencial.csv", "w") as out_file:
         out_file.write("decimal_date,adjusted_prediction\n")
         for date, prediction in zip(early_decimal_dates, early_predictions):
             out_file.write(f"{date:.4f},{prediction:.2f}\n")
@@ -44,7 +44,7 @@ with open(argv[1], 'r') as file:
     future_decimal_dates = [year + month/12 for year in future_years for month in range(12)]
     future_predictions = [b * (x**a) for x in future_decimal_dates]
 
-    with open("predictions_paris_agreement/previsoes_2025_2035_potencialv2.csv", "w") as out_file:
+    with open("predictions_paris_agreement/previsoes_2025_2035_potencial.csv", "w") as out_file:
         out_file.write("decimal_date,monthly_prediction\n")
         for date, prediction in zip(future_decimal_dates, future_predictions):
             out_file.write(f"{date:.4f},{prediction:.2f}\n")
@@ -69,5 +69,5 @@ with open(argv[1], 'r') as file:
     markersize=3)
 
     plt.legend(loc='upper left')
-    plt.savefig("graphics_paris_agreement/ajuste_potencialv2.png", dpi=300, bbox_inches='tight')
+    plt.savefig("graphics_paris_agreement/ajuste_potencial.png", dpi=300, bbox_inches='tight')
     plt.show()

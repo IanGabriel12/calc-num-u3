@@ -1,7 +1,7 @@
-# Nome a ser definido
+# Equação Climática 
 
 ## Sobre
-Este é o futuro projeto da disciplina de cálculo numérico que irá tratar de temas do meio ambiente
+Essa Branch do projeto trata a respeito das predições das concentrações de gás carbônico na atmosfera a partir do Acordo de Paris. 
 
 ## Configuração
 
@@ -45,8 +45,9 @@ x,y
 Tendo o arquivo, basta executar:
 
 ```sh
-python src/main_linear.py seu_arquivo.csv
+python src/main_{metodo_de_ajuste}.py data/co2_de_seasoned_since_paris_agreement.csv
 ```
+Esse comando gera um gráfico com o ajuste feito pelo método e a predição até 2035, dois arquivos `.csv`, um com o ajuste de 2016 a 2025, baseado na base de dados, outro com as previsões de 2025 a 2035. Os métodos disponível são `linear, geométrico, exponencial, logarítmico, potencial, quadrático`.
 
 ### Exemplo
 Usando o arquivo `data/example.csv` deve-se obter este resultado ao executar o script:
@@ -55,9 +56,11 @@ Usando o arquivo `data/example.csv` deve-se obter este resultado ao executar o s
     <img src="./docs//images/example.csv.png"/>
 </div>
 
-### Visualizando o método do trapézio
+### Medição do R2
+Para avaliar o método a partir do cálculo do R2, basta executar o seguinte comando:
 
-A função `plota_trapezoids_grafico` plota o gráfico e os trapézio utilizados na função, dessa forma conseguimos visualizar o funcionamento do método.
-<div align="center">
-    <img src="./docs//images/image.png"/>
-</div>
+```sh
+python src/main_r2.py data/co2_de_seasoned_since_paris_agreement.csv r2_comparation_paris_agreement/ajuste_2016_2025_{metodo_de_ajuste}.csv
+```
+
+Esse comando irá gerar o(s) valor(s) da medição do R2, que está disponível no arquivo r2_resultado.txt.
