@@ -32,7 +32,7 @@ with open(argv[1], 'r') as file:
             out_file.write(f"{x:.4f},{y:.2f},{lnx:.4f},{lny:.4f},{lnx*lny:.4f},{lnx*lnx:.4f}\n")
     
     with open("r2_comparation/results/parametros_resultado.txt", "a") as out_file:
-         out_file.write(f"Parâmetros potencial a={a:.4f}, b={b}\n");
+        out_file.write(f"Parâmetros potencial a={a:.10f}, b={b}\n");
 
     start = 1958.2027
     end = 2025.375
