@@ -28,8 +28,8 @@ with open(argv[1], 'r') as file:
     #     for x, y in points:
     #         out_file.write(f"{x:.4f},{y:.2f},{x*y:.4f},{x**4:.4f},{x**3:.4f},{x**2:.4f},{x**2 * y}\n")
     
-    # with open("r2_comparation/results/parametros_resultado.txt", "a") as out_file:
-    #     out_file.write(f"Parâmetros quadratico a={a:.4f}, b={b:.4f}, c={c:.4f}\n");
+    with open("r2_comparation/results/parametros_resultado.txt", "a") as out_file:
+        out_file.write(f"Parâmetros quadratico a={a:.10f}, b={b:.10f}, c={c:.10f}\n");
 
     start = 1958.2027
     end = 2025.375

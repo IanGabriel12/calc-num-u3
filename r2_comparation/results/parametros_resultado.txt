@@ -1,6 +1,6 @@
-Parâmetros linear: a=1.6515, b=-2929.3265
-Parâmetros logaritmico: a=3287.1633, b=-24611.6172
-Parâmetros exponencial: a=0.0046, b=0.0410
-Parâmetros geometrica a=1.0046, b=0.0410
-Parâmetros potencial a=9.0709, b=4.244136938728782e-28
-Parâmetros quadratico a=0.0134, b=-51.9062, c=50403.4862
+Parâmetros linear: a=1.6514990007, b=-2929.3264561628
+Parâmetros logaritmico: a=3287.1633120455, b=-24611.6172227657
+Parâmetros exponencial: a=0.0045565218, b=0.0410395588
+Parâmetros geometrica a=1.0045669186, b=0.0410395588
+Parâmetros potencial a=9.0708970243, b=4.244136938728782e-28
+Parâmetros quadratico a=0.0134446195, b=-51.9062270036, c=50403.4861774991

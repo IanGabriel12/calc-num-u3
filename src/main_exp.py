@@ -26,8 +26,8 @@ with open(argv[1], 'r') as file:
     #     for x, y in points:
     #         out_file.write(f"{x:.4f},{y:.2f},{math.log(y):.4f},{x*math.log(y):.4f},{x*x:.4f}\n")
     
-    # with open("r2_comparation/results/parametros_resultado.txt", "a") as out_file:
-    #     out_file.write(f"Parâmetros exponencial: a={a:.4f}, b={b:.4f}\n");
+    with open("r2_comparation/results/parametros_resultado.txt", "a") as out_file:
+        out_file.write(f"Parâmetros exponencial: a={a:.10f}, b={b:.10f}\n");
 
     x_all = np.linspace(min_x, 2050.9167, 1000)
     y_all = b * np.exp(a * x_all)
